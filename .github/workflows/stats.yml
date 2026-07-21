@@ -2,13 +2,18 @@ name: Update GitHub Stats Cards
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Roda toda meia-noite
-  workflow_dispatch: # Permite rodar manualmente
+    - cron: '0 0 * * *' # Roda automaticamente toda meia-noite
+  workflow_dispatch: # Permite rodar manualmente pelo botão
 
 jobs:
   update-stats:
     runs-on: ubuntu-latest
     steps:
+      # PASSO CORRIGIDO: Baixa os arquivos do seu repositório para a máquina do Actions
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Gera o arquivo SVG das linguagens mais usadas
       - name: Generate Top Languages Card
         uses: stats-organization/github-readme-stats-action@v1
         with:
@@ -17,10 +22,11 @@ jobs:
           options: 'layout=compact&theme=dracula'
           path: ./top-langs.svg
 
+      # Envia o arquivo gerado de volta para o seu repositório
       - name: Commit and Push Changes
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add top-langs.svg
           git commit -m "Update stats card" || exit 0
           git push
