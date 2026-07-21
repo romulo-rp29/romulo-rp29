@@ -11,7 +11,8 @@ My name is Rômulo,
 [![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/romulo-rp/)](https://www.linkedin.com/in/romulo-rp/)
 
 # Languages/Linguagens:
-[![Top Langs](https://vercel.app)](https://github.com)
+[![Top Langs](https://shion.dev)](https://github.com/anuraghazra/github-readme-stats)
+
 
 - Thanks for visiting.
 - Obrigado pela visita.
