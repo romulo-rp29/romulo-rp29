@@ -1,0 +1,26 @@
+name: Update GitHub Stats Cards
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Roda toda meia-noite
+  workflow_dispatch: # Permite rodar manualmente
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Top Languages Card
+        uses: stats-organization/github-readme-stats-action@v1
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          card: top-langs
+          options: 'layout=compact&theme=dracula'
+          path: ./top-langs.svg
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add top-langs.svg
+          git commit -m "Update stats card" || exit 0
+          git push
