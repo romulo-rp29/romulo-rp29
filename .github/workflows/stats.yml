@@ -13,6 +13,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          # Garante que todo o histórico e a pasta .git sejam baixados corretamente
+          fetch-depth: 0 
 
       - name: Generate Top Languages Card
         uses: stats-organization/github-readme-stats-action@v1
@@ -21,8 +24,10 @@ jobs:
           card: top-langs
           username: romulo-rp29
           options: 'layout=compact&theme=dracula'
-          path: ./top-langs.svg
+          # Mudamos o caminho para a pasta temporária do sistema, evitando conflito de Git
+          path: /home/runner/top-langs.svg
 
+      # Copia e envia o arquivo de forma limpa usando a Action especializada
       - name: Push SVG to Repository
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
