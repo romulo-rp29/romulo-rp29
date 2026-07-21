@@ -9,7 +9,7 @@ jobs:
   update-stats:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Dá permissão explícita para salvar o arquivo no seu perfil
+      contents: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -19,11 +19,10 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
           card: top-langs
-          username: romulo-rp29  # Forçado para evitar avisos
+          username: romulo-rp29
           options: 'layout=compact&theme=dracula'
           path: ./top-langs.svg
 
-      # MÉTODO NOVO: Envia o arquivo de forma automática e segura
       - name: Push SVG to Repository
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
